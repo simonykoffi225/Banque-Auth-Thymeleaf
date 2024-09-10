@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Détails du Compte</title>
+    <link rel="stylesheet" href="/css/styles.css"> <!-- Ajoutez votre propre CSS si nécessaire -->
+</head>
+<body>
+    <style>
+        .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    .b-example-divider {
+      width: 100%;
+      height: 3rem;
+      background-color: rgba(0, 0, 0, .1);
+      border: solid rgba(0, 0, 0, .15);
+      border-width: 1px 0;
+      box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+    }
+
+    .b-example-vr {
+      flex-shrink: 0;
+      width: 1.5rem;
+      height: 100vh;
+    }
+
+    .bi {
+      vertical-align: -.125em;
+      fill: currentColor;
+    }
+
+    .nav-scroller {
+      position: relative;
+      z-index: 2;
+      height: 2.75rem;
+      overflow-y: hidden;
+    }
+
+    .nav-scroller .nav {
+      display: flex;
+      flex-wrap: nowrap;
+      padding-bottom: 1rem;
+      margin-top: -1px;
+      overflow-x: auto;
+      text-align: center;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .btn-bd-primary {
+      --bd-violet-bg: #712cf9;
+      --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+      --bs-btn-font-weight: 600;
+      --bs-btn-color: var(--bs-white);
+      --bs-btn-bg: var(--bd-violet-bg);
+      --bs-btn-border-color: var(--bd-violet-bg);
+      --bs-btn-hover-color: var(--bs-white);
+      --bs-btn-hover-bg: #6528e0;
+      --bs-btn-hover-border-color: #6528e0;
+      --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+      --bs-btn-active-color: var(--bs-btn-hover-color);
+      --bs-btn-active-bg: #5a23c8;
+      --bs-btn-active-border-color: #5a23c8;
+    }
+
+    .bd-mode-toggle {
+      z-index: 1500;
+    }
+
+    .bd-mode-toggle .dropdown-menu .active .bi {
+      display: block !important;
+    }
+    .carousel-item img {
+            width: 100%;
+            height: 100vh; 
+            object-fit: cover;
+        }
+    </style>
+
+<header class="p-3 text-bg-dark">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="/defaultPage" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+          Banque
+        </a>
+
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+            <li><a th:href="@{/banque/depot/{accno}(accno=${accno})}" class="nav-link px-2 text-white">Dépôt</a></li>
+            <li><a th:href="@{/banque/retrait/{accno}(accno=${accno})}" class="nav-link px-2 text-white">Retrait</a></li>
+            <li><a th:href="@{/banque/transfert/{accno}(accno=${accno})}" class="nav-link px-2 text-white">Transfert</a></li>
+            <li><a th:href="@{/banque/profil}" class="nav-link px-2 text-white">Profil</a></li>  
+        </ul>
+
+        <div class="dropdown text-end">
+            <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="https://freesvg.org/img/abstract-user-flat-4.png" alt="mdo" width="32" height="32" class="rounded-circle" href="/banque/profil">
+              </a>
+          <ul class="dropdown-menu text-small">
+            <li><a class="dropdown-item" href="#"><span th:text="${username}"></span></a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/logout">Déconnexion</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+    <h1>Détails du Compte</h1>
+    
+    <div>
+        <h2>Informations du Compte</h2>
+        <p><strong>Numéro de Compte:</strong> <span th:text="${compte.accno}"></span></p>
+        <p><strong>Nom d'utilisateur:</strong> <span th:text="${compte.username}"></span></p>
+        <p><strong>Email:</strong> <span th:text="${compte.email}"></span></p>
+        <p><strong>Type de Compte:</strong> <span th:text="${compte.acType}"></span></p>
+        <p><strong>Solde:</strong> <span th:text="${compte.solde}"></span></p>
+    </div>
+    
+    <div>
+        <h2>Actions</h2>
+        <a href="#" th:href="@{/banque/depot/{accno}(accno=${compte.accno})}">Faire un Dépôt</a><br>
+        <a href="#" th:href="@{/banque/retrait/{accno}(accno=${compte.accno})}">Faire un Retrait</a><br>
+        <a href="#" th:href="@{/banque/transfert}">Effectuer un Transfert</a>
+    </div>
+    
+    <div>
+        <a href="#" th:href="@{/banque/comptes}">Retour à la Liste des Comptes</a>
+    </div>
+</body>
+</html>
